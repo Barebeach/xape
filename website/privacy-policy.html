@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy - XAPE</title>
+  <link rel="icon" type="image/gif" href="/icons/brain.gif" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-link {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .nav-link:hover {
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 120px auto 80px;
+      padding: 0 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .last-updated {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00bfff;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    ul li {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.75rem;
+      font-size: 1.05rem;
+    }
+
+    strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: rgba(0, 191, 255, 0.05);
+      border-left: 3px solid #00bfff;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    hr {
+      margin: 3rem 0;
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-note {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+      margin-top: 4rem;
+      padding-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .container {
+        margin-top: 100px;
+        padding: 0 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="/icons/brain.gif" alt="XAPE" class="nav-logo" />
+        <span class="nav-title">XAPE</span>
+      </div>
+      <a href="/" class="nav-link">← Back to Home</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated">Last Updated: October 22, 2024</p>
+
+    <h2>1. Overview</h2>
+    <p>XAPE is a Chrome extension that enhances the axiom.trade trading platform with AI-powered analysis and voice control. We are committed to protecting your privacy and being transparent about our data practices.</p>
+
+    <h2>2. Data We Collect</h2>
+    
+    <div class="highlight-box">
+      <p><strong>Website Content:</strong> The extension reads publicly visible cryptocurrency data from axiom.trade (token names, prices, market caps, holder counts) to provide trading analysis. This data is already visible on your screen - we simply analyze and enhance its presentation.</p>
+    </div>
+    
+    <p><strong>Local Storage:</strong> We store user preferences (notification settings, hotkeys) locally in your browser. This data never leaves your device.</p>
+
+    <p><strong>Token Balance:</strong> If you choose to use token-gated features, we verify your Solana wallet's XAPE token balance via blockchain RPC. We do not store your private keys or have access to your wallet.</p>
+
+    <h2>3. How We Use Data</h2>
+    <ul>
+      <li>Analyze token data to provide heatmaps, cabal alerts, and trading insights</li>
+      <li>Process voice commands through our backend API (using OpenAI)</li>
+      <li>Fetch cryptocurrency news relevant to your trading</li>
+      <li>Verify token ownership for access control</li>
+    </ul>
+
+    <h2>4. Data Sharing</h2>
+    
+    <div class="highlight-box">
+      <p><strong>We do NOT:</strong></p>
+      <ul style="margin-bottom: 0;">
+        <li>Sell or share your data with third parties</li>
+        <li>Collect personally identifiable information</li>
+        <li>Track your browsing history</li>
+        <li>Store your wallet private keys</li>
+        <li>Access data from websites other than axiom.trade</li>
+      </ul>
+    </div>
+
+    <p><strong>Third-Party Services:</strong> Voice commands are processed through OpenAI's API via our backend. Token balances are verified via public Solana blockchain RPC endpoints. These services receive only the minimum data necessary to function.</p>
+
+    <h2>5. Data Security</h2>
+    <p>All API communications use HTTPS encryption. User preferences are stored locally in your browser using Chrome's secure storage API. We do not maintain a centralized user database.</p>
+
+    <h2>6. Your Rights</h2>
+    <p>You can:</p>
+    <ul>
+      <li>Disable the extension at any time</li>
+      <li>Clear local storage data through Chrome settings</li>
+      <li>Use the extension without connecting your wallet</li>
+      <li>Request deletion of any data we may have stored</li>
+    </ul>
+
+    <h2>7. Children's Privacy</h2>
+    <p>XAPE is not intended for users under 13 years of age. We do not knowingly collect data from children.</p>
+
+    <h2>8. Token Gating</h2>
+    <p>Access to certain XAPE features requires holding 100 XAPE tokens. We verify token ownership by reading your wallet's public balance on the Solana blockchain. This verification happens on-demand and we do not continuously monitor your wallet.</p>
+
+    <h2>9. Voice Commands</h2>
+    <p>When you use voice commands, your spoken queries are sent to our backend server and processed through OpenAI's API to generate intelligent responses. We do not store voice recordings. Only the text transcription is temporarily processed and immediately discarded after generating a response.</p>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this privacy policy occasionally. Changes will be posted on this page with an updated "Last Updated" date. Continued use of XAPE after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>11. Contact</h2>
+    <p>For privacy concerns or questions, please contact us at: <strong>support@xape.io</strong></p>
+
+    <hr>
+    
+    <div class="footer-note">
+      <p>XAPE is an independent project and is not affiliated with axiom.trade.</p>
+      <p style="margin-top: 1rem;">© 2024 XAPE. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
+
