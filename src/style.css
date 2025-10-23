@@ -281,7 +281,7 @@ body {
   transform: translate(-50%, -50%);
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -298,12 +298,12 @@ body {
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
   border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
-  color: #a855f7;
+  color: #3b82f6;
   margin-bottom: 24px;
 }
 
@@ -341,9 +341,9 @@ body {
 }
 
 .benefit-item:hover {
-  border-color: rgba(168, 85, 247, 0.5);
+  border-color: rgba(59, 130, 246, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.15);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
 }
 
 .benefit-icon {
@@ -353,9 +353,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(168, 85, 247, 0.15);
+  background: rgba(59, 130, 246, 0.15);
   border-radius: 10px;
-  color: #a855f7;
+  color: #3b82f6;
 }
 
 .benefit-text h4 {
