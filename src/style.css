@@ -1145,3 +1145,113 @@ body {
 .video-frame {
   animation: fadeInUp 0.8s ease-out;
 }
+<<<<<<< HEAD
+=======
+
+/* ==================== PRIVACY POLICY PAGE ==================== */
+.privacy-container {
+  max-width: 900px;
+  margin: 120px auto 80px;
+  padding: 0 40px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.privacy-title {
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.privacy-updated {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 48px;
+}
+
+.privacy-section {
+  margin-bottom: 48px;
+}
+
+.privacy-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00bfff;
+  margin-bottom: 16px;
+}
+
+.privacy-section p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.privacy-section ul {
+  margin-left: 32px;
+  margin-bottom: 24px;
+}
+
+.privacy-section ul li {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.privacy-section strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.privacy-highlight {
+  background: rgba(0, 191, 255, 0.05);
+  border-left: 3px solid #00bfff;
+  padding: 24px;
+  margin: 32px 0;
+  border-radius: 8px;
+}
+
+.privacy-highlight p {
+  margin-bottom: 8px;
+}
+
+.privacy-highlight ul {
+  margin-top: 16px;
+}
+
+.privacy-divider {
+  margin: 48px 0;
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+.privacy-footer {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-align: center;
+  padding-bottom: 32px;
+}
+
+.privacy-footer p {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .privacy-container {
+    margin-top: 100px;
+    padding: 0 24px;
+  }
+
+  .privacy-title {
+    font-size: 32px;
+  }
+
+  .privacy-section h2 {
+    font-size: 22px;
+  }
+}
+>>>>>>> c9e3175 (Initial commit - XAPE website with TypeScript router and privacy policy)
