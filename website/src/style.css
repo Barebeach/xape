@@ -63,11 +63,27 @@ body {
   height: 48px;
 }
 
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .nav-title {
   font-size: 24px;
   font-weight: 800;
   letter-spacing: 0.05em;
   color: var(--text);
+  line-height: 1;
+}
+
+.nav-slogan {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .nav-links {
@@ -817,7 +833,14 @@ body {
 .cta-subtitle {
   font-size: 20px;
   color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.cta-tagline {
+  font-size: 18px;
+  color: var(--text-secondary);
   margin-bottom: 40px;
+  font-style: italic;
 }
 
 .cta-note {
