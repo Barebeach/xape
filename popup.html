@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* ===================================
+       SKILLBAR POPUP - GLASS MORPHISM DESIGN
+       Matching main skillbar design language
+       =================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 340px;
+      min-height: 320px;
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(15, 15, 25, 0.95));
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    /* ===================================
+       MAIN POPUP CONTAINER
+       =================================== */
+    .popup-container {
+      position: relative;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ===================================
+       HEADER SECTION
+       =================================== */
+    .popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px;
+    }
+
+    .title-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+    }
+
+    .version-badge {
+      background: rgba(0, 255, 136, 0.15);
+      color: #00ff88;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    /* ===================================
+       CONTROLS SECTION
+       =================================== */
+    .controls-section {
+      padding: 24px 20px;
+      flex-grow: 1;
+    }
+
+    .control-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .control-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .control-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .control-description {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      font-weight: 500;
+    }
+
+    /* ===================================
+       TOGGLE SWITCH
+       =================================== */
+    .toggle-switch {
+      position: relative;
+      width: 50px;
+      height: 28px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .toggle-switch.small {
+      width: 40px;
+      height: 22px;
+      border-radius: 22px;
+    }
+
+    .toggle-switch.active {
+      background: linear-gradient(135deg, rgba(0, 255, 136, 0.3), rgba(0, 255, 136, 0.2));
+      border-color: rgba(0, 255, 136, 0.5);
+      box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+    }
+
+    .toggle-slider {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      background: #ffffff;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle-switch.small .toggle-slider {
+      width: 18px;
+      height: 18px;
+    }
+
+    .toggle-switch.active .toggle-slider {
+      left: 24px;
+    }
+
+    .toggle-switch.small.active .toggle-slider {
+      left: 20px;
+    }
+
+    /* ===================================
+       STATUS INDICATOR
+       =================================== */
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff4444;
+      transition: all 0.3s ease;
+    }
+
+    .status-dot.active {
+      background: #00ff88;
+      box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+    }
+
+    .status-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* ===================================
+       FOOTER SECTION
+       =================================== */
+    .popup-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.02);
+      margin-top: auto;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 8px;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+
+    .link-icon {
+      font-size: 12px;
+    }
+
+    /* ===================================
+       ANIMATIONS
+       =================================== */
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 255, 136, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
+      }
+    }
+
+    .toggle-switch.active .toggle-slider {
+      animation: pulse 2s infinite;
+    }
+
+    /* ===================================
+       RESPONSIVE DESIGN
+       =================================== */
+    @media (max-height: 500px) {
+      .popup-container {
+        min-height: auto;
+      }
+      
+      .controls-section {
+        padding: 16px 20px;
+      }
+    }
+
+    /* ===================================
+       ACCESSIBILITY
+       =================================== */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus states for keyboard navigation */
+    .toggle-switch:focus,
+    .footer-link:focus {
+      outline: 2px solid rgba(0, 255, 136, 0.5);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header Section -->
+    <div class="popup-header">
+      <div class="logo-section">
+        <img src="logo.png" alt="XAPE" class="logo-icon">
+        <div class="title-section">
+          <h1 class="title">XAPE</h1>
+          <p class="subtitle">AI-Powered Crypto Analysis Agent</p>
+        </div>
+      </div>
+      <div class="version-badge">v1.0</div>
+    </div>
+
+    <!-- Main Controls Section -->
+    <div class="controls-section">
+      <!-- Extension Status Control -->
+      <div class="control-item">
+        <div class="control-info">
+          <span class="control-label">XAPE Status</span>
+          <span class="control-description">Toggle XAPE AI Agent on Axiom.trade</span>
+        </div>
+        <div class="toggle-switch" id="enableToggle">
+          <div class="toggle-slider"></div>
+        </div>
+      </div>
+
+      <div class="status-indicator">
+        <div class="status-dot" id="statusDot"></div>
+        <span class="status-text" id="statusText">Extension Active</span>
+      </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="popup-footer">
+      <div class="footer-links">
+        <a href="https://axiom.trade" target="_blank" class="footer-link">
+          <span class="link-icon">🌐</span>
+          <span>Open Axiom</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
