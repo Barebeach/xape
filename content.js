@@ -639,6 +639,11 @@ function showTokenGateMessage(reason, currentBalance, requiredBalance) {
       
     case 'INSUFFICIENT_TOKENS':
       emoji = '🔒'
+      // 🎤 ANNOUNCE TOKEN REQUIREMENT VIA VOICE
+      const tokensNeeded = requiredBalance - currentBalance
+      if (typeof speakResponse === 'function') {
+        speakResponse(`You need ${requiredBalance} XAPE tokens to use this extension. You currently have ${currentBalance} tokens. Please acquire ${tokensNeeded} more XAPE tokens to unlock full access.`)
+      }
       message = `
         <h2 style="margin: 0 0 20px 0; font-size: 32px;">🔒 XAPE Token Required</h2>
         <p style="font-size: 18px; margin-bottom: 15px; opacity: 0.9;">
