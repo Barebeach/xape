@@ -2,7 +2,7 @@
 
 const XAPE_CONFIG = {
   // Backend API Configuration
-  BACKEND_URL: 'https://postgres-production-958e.up.railway.app',
+  BACKEND_URL: 'https://lively-compassion-production.up.railway.app',
   
   // Token Gating Configuration
   REQUIRED_TOKEN_MINT: 'CRZ2GA5jMsQJRX9jqgeapnwEKx3Cchkzc3bFVmbxpump',

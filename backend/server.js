@@ -11,6 +11,17 @@ const { TOKEN_PROGRAM_ID } = require('@solana/spl-token');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Catch unhandled errors
+process.on('uncaughtException', (error) => {
+  console.error('💥 Uncaught Exception:', error);
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('💥 Unhandled Rejection at:', promise, 'reason:', reason);
+  process.exit(1);
+});
+
 // ============ TOKEN GATING CONFIGURATION ============
 const REQUIRED_TOKEN_MINT = 'CRZ2GA5jMsQJRX9jqgeapnwEKx3Cchkzc3bFVmbxpump'; // Your token
 const REQUIRED_TOKEN_AMOUNT = 100; // Minimum tokens to hold
@@ -18,21 +29,44 @@ const SOLANA_RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.s
 const solanaConnection = new Connection(SOLANA_RPC_URL, 'confirmed');
 
 // ============ CORS CONFIGURATION ============
-// CRITICAL: Allow requests from axiom.trade!
+// CRITICAL: Allow requests from axiom.trade AND Chrome extensions!
+app.use((req, res, next) => {
+  // Allow all origins (including Chrome extensions)
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400'); // 24 hours
+  
+  // Handle preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  next();
+});
+
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: true, // Reflect the request origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
   credentials: true,
   preflightContinue: false,
-  optionsSuccessStatus: 204
+  optionsSuccessStatus: 200
 }));
-
-// Handle preflight requests
-app.options('*', cors());
 
 // Parse JSON bodies with increased limit for large context data
 app.use(express.json({ limit: '10mb' })); // Increased from default 100kb to 10mb
+
+// ============ HEALTH CHECK ENDPOINT ============
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'XAPE Backend Online',
+    version: '1.0.0',
+    timestamp: new Date().toISOString(),
+    tokenGate: process.env.DISABLE_TOKEN_GATE === 'true' ? 'DISABLED' : 'ENABLED'
+  });
+});
 
 // ============ CRYPTO NEWS SYSTEM ============
 const CRYPTO_NEWS_APIS = {
@@ -1329,11 +1363,16 @@ if (pool) {
 }
 
 // Start server
-app.listen(PORT, async () => {
+app.listen(PORT, '0.0.0.0', async () => {
+  console.log(`🚀 XAPE Backend running on port ${PORT}`);
+  console.log(`📡 Backend URL: http://0.0.0.0:${PORT}`);
+  console.log(`🔐 Token gate: ${process.env.DISABLE_TOKEN_GATE === 'true' ? 'DISABLED' : 'ENABLED'}`);
   
   if (pool) {
+    console.log('✅ Database connected');
   }
   if (telegramBot) {
+    console.log('✅ Telegram bot connected');
   }
   
   // ============ CRYPTO NEWS AUTO-FETCH ============

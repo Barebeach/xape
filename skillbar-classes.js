@@ -201,7 +201,7 @@ class AxiomSkillBar {
       console.log(`🔐 Checking token balance...${forceRefresh ? ' (forcing blockchain check)' : ''}`)
       
       // Check balance with backend
-      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
       
       console.log('📡 Checking token balance at:', `${backendUrl}/api/check-token-balance`)
       
@@ -497,7 +497,7 @@ class AxiomSkillBar {
       this.lastAnnouncedHeadline = localStorage.getItem('xape_last_announced_headline') || null
     }
     
-    const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+    const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
     
     this.newsPollingInterval = setInterval(async () => {
       try {
@@ -560,7 +560,7 @@ class AxiomSkillBar {
         return
       }
       
-      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
       
       console.log(`?? Syncing ${context.coins.length} coins to backend...`)
       
@@ -960,7 +960,7 @@ class AxiomSkillBar {
     console.log('?? Toggle XAPE awake/sleep')
     
     try {
-      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
       const response = await fetch(`${backendUrl}/api/xape/sleep`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1884,7 +1884,7 @@ TO FIX:
       console.log('📰 NEWS QUERY DETECTED - FETCHING FRESH NEWS NOW!')
       this.showXapeResponse('📰 Fetching latest news...')
       
-      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
       try {
         // Force immediate news fetch on backend
         const fetchResponse = await fetch(`${backendUrl}/api/news/fetch`, { method: 'POST' })
@@ -2316,7 +2316,7 @@ TO FIX:
     
     try {
       
-      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://postgres-production-958e.up.railway.app'
+      const backendUrl = localStorage.getItem('xape_backend_url') || 'https://lively-compassion-production.up.railway.app'
       
       console.log('?? Calling backend:', `${backendUrl}/api/chat`)
       

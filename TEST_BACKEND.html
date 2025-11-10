@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test XAPE Backend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: white;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            margin: 10px;
+            background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover { opacity: 0.9; }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>🔧 XAPE Backend Test</h1>
+    
+    <button onclick="testBackend()">Test Backend Health</button>
+    <button onclick="testTokenCheck()">Test Token Check</button>
+    
+    <div id="result"></div>
+
+    <script>
+        const BACKEND_URL = 'https://lively-compassion-production.up.railway.app';
+        const TEST_WALLET = 'bPFq8iQmTsbVsHUaq5ymVnkzK7a4SYpnBmL4w5iY45F'; // Your wallet
+        
+        async function testBackend() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '🔄 Testing backend...';
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `<span class="success">✅ BACKEND ONLINE!</span>\n\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ BACKEND FAILED!</span>\n\n${error.message}`;
+            }
+        }
+        
+        async function testTokenCheck() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '🔄 Checking token balance...';
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/check-token-balance`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        walletAddress: TEST_WALLET,
+                        forceRefresh: true 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (data.hasAccess) {
+                    resultDiv.innerHTML = `<span class="success">✅ ACCESS GRANTED!</span>\n\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    resultDiv.innerHTML = `<span class="error">❌ INSUFFICIENT TOKENS</span>\n\n${JSON.stringify(data, null, 2)}`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<span class="error">❌ TOKEN CHECK FAILED!</span>\n\n${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
+

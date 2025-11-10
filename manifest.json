@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "XAPE - AI Crypto Agent",
-  "version": "1.0.2",
+  "version": "1.0.8",
   "description": "AI-powered crypto analysis for axiom.trade with voice commands and real-time insights.",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
     "*://*.twitter.com/*", 
     "*://twitter.com/*", 
-    "https://postgres-production-958e.up.railway.app/*"
+    "https://lively-compassion-production.up.railway.app/*",
+    "https://*.railway.app/*"
   ],
   "content_scripts": [
     {
