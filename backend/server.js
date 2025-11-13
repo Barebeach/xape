@@ -24,7 +24,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
 // ============ TOKEN GATING CONFIGURATION ============
 let REQUIRED_TOKEN_MINT = process.env.REQUIRED_TOKEN_MINT || 'CRZ2GA5jMsQJRX9jqgeapnwEKx3Cchkzc3bFVmbxpump'; // Your token
-let REQUIRED_TOKEN_AMOUNT = parseInt(process.env.REQUIRED_TOKEN_AMOUNT) || 100; // Minimum tokens to hold
+let REQUIRED_TOKEN_AMOUNT = parseInt(process.env.REQUIRED_TOKEN_AMOUNT) || 500000; // Minimum tokens to hold
 const SOLANA_RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
 const solanaConnection = new Connection(SOLANA_RPC_URL, 'confirmed');
 
