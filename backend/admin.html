@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAPE Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 191, 255, 0.2);
+        }
+
+        h1 {
+            color: #00bfff;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 32px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #00bfff;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 191, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #00bfff;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+        }
+
+        .current-value {
+            background: rgba(0, 191, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 3px solid #00bfff;
+        }
+
+        .current-value h3 {
+            color: #00bfff;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .current-value p {
+            color: rgba(255, 255, 255, 0.8);
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00bfff 0%, #0080ff 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.5);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .message.success {
+            background: rgba(0, 255, 100, 0.1);
+            border: 1px solid rgba(0, 255, 100, 0.3);
+            color: #00ff64;
+        }
+
+        .message.error {
+            background: rgba(255, 50, 50, 0.1);
+            border: 1px solid rgba(255, 50, 50, 0.3);
+            color: #ff3232;
+        }
+
+        .info-box {
+            background: rgba(255, 165, 0, 0.1);
+            border-left: 3px solid #ffa500;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .info-box p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🤖</div>
+        <h1>XAPE ADMIN</h1>
+        <p class="subtitle">Update Contract Address & Settings</p>
+
+        <div class="current-value">
+            <h3>📍 Current Token Address:</h3>
+            <p id="currentCA">Loading...</p>
+        </div>
+
+        <div class="info-box">
+            <p>⚡ <strong>Quick Update:</strong> Paste the new contract address below and click Update. Changes take effect immediately - no redeployment needed!</p>
+        </div>
+
+        <form id="updateForm">
+            <div class="form-group">
+                <label for="adminPassword">🔐 Admin Password:</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="newCA">🪙 New Contract Address (CA):</label>
+                <input type="text" id="newCA" placeholder="e.g., 7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr" required>
+            </div>
+
+            <div class="form-group">
+                <label for="minTokens">💰 Minimum Tokens Required:</label>
+                <input type="text" id="minTokens" placeholder="e.g., 1000" value="1000">
+            </div>
+
+            <button type="submit">🚀 Update Configuration</button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'https://lively-compassion-production.up.railway.app';
+
+        // Load current configuration
+        async function loadCurrentConfig() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/admin/config`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('currentCA').textContent = data.config.tokenMint || 'Not set';
+                    document.getElementById('minTokens').value = data.config.minTokens || 1000;
+                } else {
+                    document.getElementById('currentCA').textContent = 'Error loading';
+                }
+            } catch (error) {
+                console.error('Error loading config:', error);
+                document.getElementById('currentCA').textContent = 'Error loading';
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('updateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const password = document.getElementById('adminPassword').value;
+            const newCA = document.getElementById('newCA').value.trim();
+            const minTokens = parseInt(document.getElementById('minTokens').value);
+
+            const messageEl = document.getElementById('message');
+            messageEl.style.display = 'none';
+
+            // Validate CA format (basic Solana address validation)
+            if (newCA.length < 32 || newCA.length > 44) {
+                showMessage('❌ Invalid contract address format!', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/admin/update-config`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password: password,
+                        tokenMint: newCA,
+                        minTokens: minTokens
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showMessage('✅ Configuration updated successfully!', 'success');
+                    loadCurrentConfig(); // Reload current config
+                    document.getElementById('newCA').value = '';
+                    document.getElementById('adminPassword').value = '';
+                } else {
+                    showMessage(`❌ ${data.message || 'Update failed'}`, 'error');
+                }
+            } catch (error) {
+                console.error('Error updating config:', error);
+                showMessage('❌ Network error. Check backend connection.', 'error');
+            }
+        });
+
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageEl.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Load config on page load
+        loadCurrentConfig();
+    </script>
+</body>
+</html>
+

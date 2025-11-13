@@ -23,10 +23,13 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 // ============ TOKEN GATING CONFIGURATION ============
-const REQUIRED_TOKEN_MINT = 'CRZ2GA5jMsQJRX9jqgeapnwEKx3Cchkzc3bFVmbxpump'; // Your token
-const REQUIRED_TOKEN_AMOUNT = 100; // Minimum tokens to hold
+let REQUIRED_TOKEN_MINT = process.env.REQUIRED_TOKEN_MINT || 'CRZ2GA5jMsQJRX9jqgeapnwEKx3Cchkzc3bFVmbxpump'; // Your token
+let REQUIRED_TOKEN_AMOUNT = parseInt(process.env.REQUIRED_TOKEN_AMOUNT) || 100; // Minimum tokens to hold
 const SOLANA_RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
 const solanaConnection = new Connection(SOLANA_RPC_URL, 'confirmed');
+
+// Admin password for config updates
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'xape2024';
 
 // ============ CORS CONFIGURATION ============
 // CRITICAL: Allow requests from axiom.trade AND Chrome extensions!
@@ -1361,6 +1364,105 @@ if (pool) {
     }
   }, 30000); // Every 30 seconds
 }
+
+// ============ ADMIN PANEL ENDPOINTS ============
+
+// Serve admin panel HTML
+app.get('/admin', (req, res) => {
+  res.sendFile(__dirname + '/admin.html');
+});
+
+// Get current configuration
+app.get('/api/admin/config', (req, res) => {
+  try {
+    res.json({
+      success: true,
+      config: {
+        tokenMint: REQUIRED_TOKEN_MINT,
+        minTokens: REQUIRED_TOKEN_AMOUNT,
+        solanaRpcUrl: SOLANA_RPC_URL
+      }
+    });
+  } catch (error) {
+    console.error('❌ Error getting config:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to get configuration'
+    });
+  }
+});
+
+// Update configuration (protected by password)
+app.post('/api/admin/update-config', async (req, res) => {
+  try {
+    const { password, tokenMint, minTokens } = req.body;
+
+    // Validate password
+    if (password !== ADMIN_PASSWORD) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid admin password'
+      });
+    }
+
+    // Validate inputs
+    if (!tokenMint || tokenMint.length < 32 || tokenMint.length > 44) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid token mint address'
+      });
+    }
+
+    if (!minTokens || minTokens < 1 || minTokens > 1000000000) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid minimum tokens amount'
+      });
+    }
+
+    // Verify the token mint exists on Solana
+    try {
+      const mintPublicKey = new PublicKey(tokenMint);
+      const mintInfo = await solanaConnection.getAccountInfo(mintPublicKey);
+      
+      if (!mintInfo) {
+        return res.status(400).json({
+          success: false,
+          message: 'Token mint address not found on Solana blockchain'
+        });
+      }
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid Solana address format'
+      });
+    }
+
+    // Update configuration
+    REQUIRED_TOKEN_MINT = tokenMint;
+    REQUIRED_TOKEN_AMOUNT = parseInt(minTokens);
+
+    console.log('✅ Configuration updated:');
+    console.log(`   Token Mint: ${REQUIRED_TOKEN_MINT}`);
+    console.log(`   Min Tokens: ${REQUIRED_TOKEN_AMOUNT}`);
+
+    res.json({
+      success: true,
+      message: 'Configuration updated successfully',
+      config: {
+        tokenMint: REQUIRED_TOKEN_MINT,
+        minTokens: REQUIRED_TOKEN_AMOUNT
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Error updating config:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to update configuration'
+    });
+  }
+});
 
 // Start server
 app.listen(PORT, '0.0.0.0', async () => {
